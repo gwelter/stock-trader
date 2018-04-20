@@ -7,8 +7,9 @@
         <router-link class="nav-item" activeClass="active" tag="li" to="/portfolio"><a class="nav-link">Portfolio</a></router-link>
         <router-link class="nav-item" activeClass="active" tag="li" to="/stocks"><a class="nav-link">Stocks</a></router-link>
       </ul>
+      <strong class="navbar-text narbar-right">Funds: {{funds | currency}}</strong>
       <ul class="nav navbar-nav narbar-right">
-        <li class="nav-item"><a href="#" class="nav-link">End Day</a></li>
+        <li class="nav-item"><a href="#" class="nav-link" @click="endDay">End Day</a></li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Save & Load
@@ -22,3 +23,29 @@
     </div>
   </nav>
 </template>
+
+<script>
+import { mapActions } from 'vuex'
+
+export default {
+  computed: {
+    funds () {
+      return this.$store.getters.funds
+    }
+  },
+  methods: {
+    ...mapActions([
+      'randomizeStocks'
+    ]),
+    endDay () {
+      this.randomizeStocks()
+    }
+  }
+}
+</script>
+
+<style scoped>
+  nav {
+    margin: 30px 0;
+  }
+</style>
