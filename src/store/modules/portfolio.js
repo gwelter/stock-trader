@@ -24,6 +24,10 @@ const mutations = {
       state.stocks.splice(state.stocks.indexOf(record), 1)
     }
     state.funds += stockPrice * quantity
+  },
+  'SET_PORTFOLIO' (state, portfolio) {
+    state.funds = portfolio.funds
+    state.stocks = portfolio.stocksPortfolio ? portfolio.stocksPortfolio : []
   }
 }
 
@@ -34,7 +38,7 @@ const actions = {
 }
 
 const getters = {
-  stockPortfolio (state, getters) {
+  stocksPortfolio (state, getters) {
     return state.stocks.map(stock => {
       const record = getters.stocks.find(element => element.id == stock.id)
       return {
